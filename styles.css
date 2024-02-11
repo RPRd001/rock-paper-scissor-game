@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1e1e1e;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    color: white;
+    background-color: #2b2b2b;
+    height: 300px;
+    padding: 1rem;
+    border: 0.5px solid darkslategrey;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 10px 10px darkslategray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}
+
+#computer-selection-img,
+#user-selection-img {
+    width: 80px;
+    height: auto;
+    display: inline-block;
+}
+
+.selection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#play {
+    background-color: green;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+#play:hover {
+    cursor: pointer;
+    background-color: white;
+    color: green;
+}
+
+.options {
+    text-align: center;
+    padding: 0.5rem;
+    display: inline-block;
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.won {
+    color: green;
+}
+
+.loose {
+    color: red;
+}
+
+.draw {
+    color: blue;
+}
+
+#reset {
+    background-color: rgb(129, 31, 31);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+#reset:hover {
+    cursor: pointer;
+    background-color: white;
+    color: rgb(129, 31, 31);
+}
