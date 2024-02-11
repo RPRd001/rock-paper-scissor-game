@@ -45,6 +45,8 @@ function playRound(playerSelection, computerSelection) {
         are capitalized and therefore nicer to read:
 
         -! But somehow it didn't work (ERROR: charAt(0) is not a function)
+        -! This may be an error caused by the type of value is targeted and the
+        -!  method it should be used according to that...
 
         ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)}
         ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)}
