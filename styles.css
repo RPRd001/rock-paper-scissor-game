@@ -77,18 +77,6 @@ body {
     border: none;
 }
 
-.won {
-    color: green;
-}
-
-.loose {
-    color: red;
-}
-
-.draw {
-    color: blue;
-}
-
 #reset {
     background-color: rgb(129, 31, 31);
     color: white;
@@ -101,4 +89,11 @@ body {
     cursor: pointer;
     background-color: white;
     color: rgb(129, 31, 31);
+}
+
+.score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }

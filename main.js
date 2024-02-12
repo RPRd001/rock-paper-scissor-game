@@ -6,16 +6,24 @@ const selectedOption = document.querySelectorAll('.select-option')
 const userOptionImage = document.querySelector('#user-selection-img');
 const computerOptionImage = document.querySelector('#computer-selection-img');
 const resultMessage = document.querySelector('.result');
+const computerScoreLabel = document.querySelector('.computer-score');
+const playerScoreLabel = document.querySelector('.player-score');
 
-// Adding eventListeners for the Play and Reset buttons
-playButton.addEventListener('click', playRound);
+// Counter Variable for the Rounds (max = 5 rounds)
+let roundCount = 0;
 
 // Bank of options for the Computer to randomly select one of them
 const choices = ['rock', 'paper', 'scissors'];
 
-// Computer and Player Selection Variables
+// Computer and Player Variables
 let playerSelection = "";
 let computerSelection = "";
+let computerScore = 0;
+let playerScore = 0;
+
+// Adding eventListeners for the Play and Reset buttons
+playButton.addEventListener('click', playRound);
+
 
 // Changing the user image of the selection to make it correspond to the selected options:
 selectedOption.forEach(option => {
@@ -36,50 +44,65 @@ selectedOption.forEach(option => {
 });
 
 // Game Logic
-function playRound(playerSelection, computerSelection) {
-    /* 
-        NOTE:
+function playRound() {
 
-        - This lines of code basically capitalize the choices taken by the user
-        and the computer, so when they are displayed in the alert message they
-        are capitalized and therefore nicer to read:
+    if (roundCount < 5) {
+        // Taking the value from the options (select element)
+        playerSelection = options.value;
+        // Taking the value randomly from the choices array
+        computerSelection = choices[Math.floor(Math.random() * choices.length)];
 
-        -! But somehow it didn't work (ERROR: charAt(0) is not a function)
-        -! This may be an error caused by the type of value is targeted and the
-        -!  method it should be used according to that...
+        if (playerSelection == computerSelection) {
+            computerOptionImage.src = `./img/${computerSelection}.png`;
+            gameContainer.setAttribute('style', 'box-shadow: 0px 0px 10px 10px white;')
+            resultMessage.innerText = 'Drawn! Nobody won!';
+        }
+        else if (playerSelection == 'paper' && computerSelection == 'rock') {
+            computerOptionImage.src = `./img/${computerSelection}.png`;
+            gameContainer.setAttribute('style', 'box-shadow: 0px 0px 10px 10px green;')
+            resultMessage.innerText = `You won! ${playerSelection} beats ${computerSelection}`;
+            playerScore++;
+        }
+        else if (playerSelection == 'scissors' && computerSelection == 'paper') {
+            computerOptionImage.src = `./img/${computerSelection}.png`;
+            gameContainer.setAttribute('style', 'box-shadow: 0px 0px 10px 10px green;')
+            resultMessage.innerText = `You won! ${playerSelection} beats ${computerSelection}`;
+            playerScore++;
+        }
+        else if (playerSelection == 'rock' && computerSelection == 'scissors') {
+            computerOptionImage.src = `./img/${computerSelection}.png`;
+            gameContainer.setAttribute('style', 'box-shadow: 0px 0px 10px 10px green;')
+            resultMessage.innerText = `You won! ${playerSelection} beats ${computerSelection}`;
+            playerScore++;
+        }
+        else {
+            computerOptionImage.src = `./img/${computerSelection}.png`;
+            gameContainer.setAttribute('style', 'box-shadow: 0px 0px 10px 10px red;')
+            resultMessage.innerText = `You lose! ${computerSelection} beats ${playerSelection}`;
+            computerScore++;
+        }
 
-        ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)}
-        ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)}
-    */
+        computerScoreLabel.innerText = `PC: ${computerScore}`;
+        playerScoreLabel.innerText = `You: ${playerScore}`;
+        roundCount++;
+    }
+    else if (roundCount == 5) {
+        if (playerScore > computerScore) {
+            alert("You Won!");
+        }
+        else if (playerScore < computerScore) {
+            alert("The Computer Won!")
+        }
+        else {
+            alert('Draw! Nobody Won');
+        }
+        roundCount = 0;
+        computerScore = 0;
+        playerScore = 0;
+        computerScoreLabel.innerText = "";
+        playerScoreLabel.innerText = "";
+        resultMessage.innerText = "";
+    }
 
-    // Taking the value from the options (select element)
-    playerSelection = options.value;
-    // Taking the value randomly from the choices array
-    computerSelection = choices[Math.floor(Math.random() * choices.length)];
-
-    if (playerSelection == computerSelection) {
-        computerOptionImage.src = `./img/${computerSelection}.png`;
-        gameContainer.setAttribute('style', 'box-shadow: 0px 0px 10px 10px white;')
-        resultMessage.innerText = 'Drawn! Nobody won!';
-    }
-    else if (playerSelection == 'paper' && computerSelection == 'rock') {
-        computerOptionImage.src = `./img/${computerSelection}.png`;
-        gameContainer.setAttribute('style', 'box-shadow: 0px 0px 10px 10px green;')
-        resultMessage.innerText = `You won! ${playerSelection} beats ${computerSelection}`;
-    }
-    else if (playerSelection == 'scissors' && computerSelection == 'paper') {
-        computerOptionImage.src = `./img/${computerSelection}.png`;
-        gameContainer.setAttribute('style', 'box-shadow: 0px 0px 10px 10px green;')
-        resultMessage.innerText = `You won! ${playerSelection} beats ${computerSelection}`;
-    }
-    else if (playerSelection == 'rock' && computerSelection == 'scissors') {
-        computerOptionImage.src = `./img/${computerSelection}.png`;
-        gameContainer.setAttribute('style', 'box-shadow: 0px 0px 10px 10px green;')
-        resultMessage.innerText = `You won! ${playerSelection} beats ${computerSelection}`;
-    }
-    else {
-        computerOptionImage.src = `./img/${computerSelection}.png`;
-        gameContainer.setAttribute('style', 'box-shadow: 0px 0px 10px 10px red;')
-        resultMessage.innerText = `You lose! ${computerSelection} beats ${playerSelection}`;
-    }
+    
 }
